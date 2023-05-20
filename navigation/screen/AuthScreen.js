@@ -38,6 +38,7 @@ const AuthScreen = ({ onButtonClick }) => {
       <Image style={styles.image} source={birdFlying} />
       <StatusBar style="auto" />
       <Button title="Get Started" onPress={handlePress} />
+      <Button title="Sign in" onPress={handlePress} />
     </View>
   );
 };
