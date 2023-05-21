@@ -9,9 +9,11 @@ import HomeScreen from './screen/HomeScreen';
 import RequestScreen from './screen/RequestScreen';
 import ProfileScreen from './screen/ProfileScreen';
 import AuthScreen from './screen/AuthScreen';
+import SignInScreen from './screen/SignInScreen';
 
 //Screen Names
 const homeName = 'Home';
+const signinName = 'Sign in';
 const requestName = 'Request';
 const profileName = 'Profile';
 
@@ -35,6 +37,8 @@ export default function MainContainer() {
 
             if (rn === homeName) {
               iconName = focused ? 'home' : 'home-outline'
+            } else if (rn === signinName) {
+              iconName = focused ? 'arrow-up' : 'arrow-up'
             } else if (rn === requestName) {
               iconName = focused ? 'add' : 'add-circle-outline'
             } else if (rn === profileName) {
@@ -46,6 +50,7 @@ export default function MainContainer() {
         })}>
 
         <Tab.Screen name = {homeName} component={HomeScreen}/>
+        <Tab.Screen name = {signinName} component={SignInScreen}/>
         <Tab.Screen name = {requestName} component={RequestScreen}/>
         <Tab.Screen name = {profileName} component={ProfileScreen}/>
 

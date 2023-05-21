@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
-import { FontAwesome } from 'react-native-vector-icons';
+//import { FontAwesome } from 'react-native-vector-icons';
 import * as Font from 'expo-font';
 import {TextInput, Button, Alert} from 'react-native';
 import React from 'react';
@@ -13,6 +13,7 @@ import requestButton from './reqButton.png'
 import requestBubble from './requestBubble.png'
 import yes from './yes.png'
 import no from './no.png'
+
 
 export default function App() {
   
@@ -44,7 +45,7 @@ export default function App() {
    console.log("Geocoded Address:");
    console.log(geocodedLocation);
  };
-
+ 
 
  const reverseGeocode = async () => {
    const reverseGeocodedAddress = await Location.reverseGeocodeAsync({
@@ -56,6 +57,7 @@ export default function App() {
    console.log("Reverse Geocoded:");
    console.log(reverseGeocodedAddress);
  };
+ 
  const isBackgroundRed = true;
 
 
