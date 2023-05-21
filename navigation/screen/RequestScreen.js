@@ -1,16 +1,18 @@
 
+import { Image, View, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
 //import { FontAwesome } from 'react-native-vector-icons';
 import * as Font from 'expo-font';
 import {TextInput, Button, Alert} from 'react-native';
 import React from 'react';
-import { Image } from 'react-native';
 import geoBack from './geoBack.png';
 import requestButton from './reqButton.png'
 import requestBubble from './requestBubble.png'
+
 import yes from './yes.png'
 import no from './no.png'
 
@@ -19,7 +21,7 @@ export default function App() {
   
  const [location, setLocation] = useState();
  const [address, setAddress] = useState();
-
+ const navigation = useNavigation();
 
  Location.setGoogleApiKey("AIzaSyD5GUOMMrDY5Ml8JOQ5j7z7p9f8GaGCDBg");
 
@@ -85,14 +87,19 @@ export default function App() {
           source={requestBubble}
           style={{ width: '75%', height: '27%', position: 'absolute', top: 415, zIndex: -1 }}
         />
+        <TouchableOpacity onPress={() => navigation.navigate('Other Profile')}>
         <Image
           source={yes}
-          style={{ width: '25%', height: '20%', position: 'absolute', right: 20, top: 500, zIndex: -1 }}
+          style={{ width: 100, height: 100, position: 'absolute', right: 20, top: 100, zIndex: -1 }}
         />
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate('Map')}>
         <Image
           source={no}
-          style={{ width: '25%', height: '20%', position: 'absolute', left: 20, top: 500, zIndex: -1 }}
+          style={{ width: 100, height: 100, position: 'absolute', left: 20, top: 100, zIndex: -1 }}
         />
+      </TouchableOpacity>
     
      <StatusBar style="auto" />
    </View>

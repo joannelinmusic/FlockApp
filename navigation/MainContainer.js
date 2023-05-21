@@ -4,6 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { UserProvider } from './screen/UserProvider';
+import OtherProfileScreen from './screen/OtherProfileScreen'; 
+import MapScreen from './screen/MapScreen'; 
+
+
 
 //Screen
 import HomeScreen from './screen/HomeScreen';
@@ -45,6 +49,10 @@ export default function MainContainer() {
               iconName = focused ? 'add' : 'add-circle-outline'
             } else if (rn === profileName) {
               iconName = focused ? 'person' : 'person-circle-outline'
+            } else if (rn === 'Other Profile') {
+              iconName = focused ? 'person' : 'person-circle-outline';
+            } else if (rn === 'Map') {
+              iconName = focused ? 'map' : 'map-outline';
             }
 
             return <Ionicons name = {iconName} size = {size} color = {color}/>
@@ -55,6 +63,9 @@ export default function MainContainer() {
         <Tab.Screen name = {signUpName} component={SignInScreen}/>
         <Tab.Screen name = {requestName} component={RequestScreen}/>
         <Tab.Screen name = {profileName} component={ProfileScreen}/>
+        <Tab.Screen name = "Other Profile" component={OtherProfileScreen} />
+        <Tab.Screen name = "Map" component={MapScreen} />
+
 
       </Tab.Navigator>
     ) : (
