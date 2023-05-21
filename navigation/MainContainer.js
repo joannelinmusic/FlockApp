@@ -13,7 +13,7 @@ import SignInScreen from './screen/SignInScreen';
 
 //Screen Names
 const homeName = 'Home';
-const signinName = 'Sign in';
+const signUpName = 'Sign Up';
 const requestName = 'Request';
 const profileName = 'Profile';
 
@@ -37,7 +37,7 @@ export default function MainContainer() {
 
             if (rn === homeName) {
               iconName = focused ? 'home' : 'home-outline'
-            } else if (rn === signinName) {
+            } else if (rn === signUpName) {
               iconName = focused ? 'arrow-up' : 'arrow-up'
             } else if (rn === requestName) {
               iconName = focused ? 'add' : 'add-circle-outline'
@@ -50,7 +50,7 @@ export default function MainContainer() {
         })}>
 
         <Tab.Screen name = {homeName} component={HomeScreen}/>
-        <Tab.Screen name = {signinName} component={SignInScreen}/>
+        <Tab.Screen name = {signUpName} component={SignInScreen}/>
         <Tab.Screen name = {requestName} component={RequestScreen}/>
         <Tab.Screen name = {profileName} component={ProfileScreen}/>
 
