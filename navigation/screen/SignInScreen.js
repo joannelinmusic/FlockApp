@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TextInput, StyleSheet, Button } from 'react-native';
+import { UserContext } from './UserContext';
 
 const SignInScreen = () => {
     const [firstName, setFirstName] = useState('');
@@ -9,8 +10,18 @@ const SignInScreen = () => {
     const [major, setMajor] = useState('');
     const [id, setId] = useState('');
 
+    const { setUser } = useContext(UserContext);
+
     const submitForm = () => {
-        // handle form submission here
+        // handling form submission here
+        setUser({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            age: age,
+            major: major,
+            id: id,
+        })
     }
 
     return (
