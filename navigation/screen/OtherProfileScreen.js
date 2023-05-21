@@ -8,7 +8,7 @@ import { UserContext } from './UserContext';
 import * as ImagePicker from 'expo-image-picker';
 
 
-const ProfileScreen = () => {
+const OtherProfileScreen = () => {
     const { user } = useContext(UserContext);
     const [image, setImage] = useState(require('../../assets/headshot.png'));
 
@@ -132,4 +132,4 @@ const ProfileScreen = () => {
   loadFontsAsync();
 
 
-  export default ProfileScreen;
+  export default OtherProfileScreen;
