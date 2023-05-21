@@ -1,13 +1,38 @@
 import * as React from 'react';
-import { useContext } from 'react';
-import {View, Text, Image, StyleSheet, ImageBackground} from 'react-native';
+import { useState, useContext } from 'react';
+import {View, Text, Image, StyleSheet, Button, ImageBackground} from 'react-native';
 import { FontAwesome } from 'react-native-vector-icons';
 import * as Font from 'expo-font';
 import profileBackground from './profBackground.gif';
 import { UserContext } from './UserContext';
+import * as ImagePicker from 'expo-image-picker';
+
 
 const ProfileScreen = () => {
     const { user } = useContext(UserContext);
+    const [image, setImage] = useState(require('../../assets/headshot.png'));
+
+    const pickImage = async () => {
+  
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') {
+      alert('Sorry, we need camera roll permissions to make this work!');
+      return;
+    }
+
+  
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+ 
+    if (!result.cancelled) {
+      setImage({ uri: result.assets[0].uri });
+    }
+    };
 
     return (
       <ImageBackground
@@ -15,10 +40,9 @@ const ProfileScreen = () => {
       style={{ flex: 1, resizeMode: 'cover' }}
     >
       <View style={backgroundStyles.container}>
-        <Image
-          source={require('../../assets/headshot.png')}
-          style={[infoStyles.profileImage, {marginTop: 8}]}
-        />
+        <Image source={image} style={infoStyles.profileImage} />
+        <Button title="Change Profile Picture" onPress={pickImage} />
+    
         <Text style={infoStyles.name}>{user.firstName} {user.lastName}</Text>
         <View style={infoStyles.info}>
           <FontAwesome name="calendar" size={24} color="rgb(103, 79, 110)" style={infoStyles.icon} />
