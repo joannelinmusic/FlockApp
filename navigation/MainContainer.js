@@ -3,6 +3,7 @@ import {useState} from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { UserProvider } from './screen/UserProvider';
 
 //Screen
 import HomeScreen from './screen/HomeScreen';
@@ -26,6 +27,7 @@ export default function MainContainer() {
     setShowMainContainer(true);
   };
   return (
+    <UserProvider>
     <NavigationContainer>
     {showMainContainer ? (
       <Tab.Navigator
@@ -59,6 +61,7 @@ export default function MainContainer() {
         <AuthScreen onButtonClick={handleWelcomeButtonClick} />
       )}
     </NavigationContainer>
+    </UserProvider>
   );
 }
 

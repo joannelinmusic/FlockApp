@@ -1,10 +1,14 @@
 import * as React from 'react';
+import { useContext } from 'react';
 import {View, Text, Image, StyleSheet, ImageBackground} from 'react-native';
 import { FontAwesome } from 'react-native-vector-icons';
 import * as Font from 'expo-font';
 import profileBackground from './profBackground.gif';
+import { UserContext } from './UserContext';
 
 const ProfileScreen = () => {
+    const { user } = useContext(UserContext);
+
     return (
       <ImageBackground
       source={profileBackground}
@@ -15,23 +19,23 @@ const ProfileScreen = () => {
           source={require('../../assets/headshot.png')}
           style={[infoStyles.profileImage, {marginTop: 8}]}
         />
-        <Text style={infoStyles.name}>Joanne Lin</Text>
+        <Text style={infoStyles.name}>{user.firstName} {user.lastName}</Text>
         <View style={infoStyles.info}>
           <FontAwesome name="calendar" size={24} color="rgb(103, 79, 110)" style={infoStyles.icon} />
-          <Text style={infoStyles.info}>AGE: 3</Text>
+          <Text style={infoStyles.info}>AGE: {user.age}</Text>
         </View>
 
         <View style={infoStyles.info}>
           <FontAwesome name="graduation-cap" size={24} color="rgb(103, 79, 110)" style={infoStyles.icon} />
-          <Text style={infoStyles.info}>MAJOR: DATA SCIENCE</Text>
+          <Text style={infoStyles.info}>MAJOR: {user.major}</Text>
         </View>
         <View style={infoStyles.info}>
           <FontAwesome name="id-card" size={24} color="rgb(103, 79, 110)" style={infoStyles.icon} />
-          <Text style={infoStyles.info}>ID NUMBER: 2****08</Text>
+          <Text style={infoStyles.info}>ID NUMBER: {user.id}</Text>
         </View>
         <View style={infoStyles.info}>
           <FontAwesome name="envelope" size={24} color="rgb(103, 79, 110)" style={infoStyles.icon} />
-          <Text style={infoStyles.info}>EMAIL: JLIN123@DEPAUL.EDU</Text>
+          <Text style={infoStyles.info}>EMAIL: {user.email}</Text>
         </View>
       </View>
     </ImageBackground>
