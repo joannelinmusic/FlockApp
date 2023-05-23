@@ -12,8 +12,14 @@ Notifications.setNotificationHandler({
   }),
 });
 
+// TO DO:
+  // Reminder To Make Phone Have a Vibrating Notification
+  // Also, the repeating condition is an an temporary until we implement backend to form the time~sensitive notification.
+
 const MapScreen = () => {
     const [location, setLocation] = useState(null);
+    // Assuming the condition to remove the notification is after 1 hour
+    const ONE_HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
 
     useEffect(() => {
       (async () => {
@@ -35,6 +41,8 @@ const MapScreen = () => {
       await Notifications.scheduleNotificationAsync({
         content: notification,
         trigger: null,
+        seconds: ONE_HOUR_IN_MILLISECONDS / 1000, 
+        repeats: true 
       });
       })();
     }, []);

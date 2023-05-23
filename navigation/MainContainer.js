@@ -67,6 +67,7 @@ export default function MainContainer() {
         <Tab.Screen name = "Map" component={MapScreen} />
 
 
+
       </Tab.Navigator>
     ) : (
         <AuthScreen onButtonClick={handleWelcomeButtonClick} />
