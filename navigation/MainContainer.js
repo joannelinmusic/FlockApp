@@ -15,6 +15,7 @@ import RequestScreen from './screen/RequestScreen';
 import ProfileScreen from './screen/ProfileScreen';
 import AuthScreen from './screen/AuthScreen';
 import SignInScreen from './screen/SignInScreen';
+import GoSomewhere from './screen/GoSomewhere.js';
 
 //Screen Names
 const homeName = 'Home';
@@ -53,6 +54,8 @@ export default function MainContainer() {
               iconName = focused ? 'person' : 'person-circle-outline';
             } else if (rn === 'Map') {
               iconName = focused ? 'map' : 'map-outline';
+            } else if (rn === 'Go Somewhere') {
+              iconName = focused ? 'map' : 'map-outline';
             }
 
             return <Ionicons name = {iconName} size = {size} color = {color}/>
@@ -60,11 +63,12 @@ export default function MainContainer() {
         })}>
 
         <Tab.Screen name = {homeName} component={HomeScreen}/>
-        <Tab.Screen name = {signUpName} component={SignInScreen}/>
+        {/* <Tab.Screen name = {signUpName} component={SignInScreen}/> */}
         <Tab.Screen name = {requestName} component={RequestScreen}/>
         <Tab.Screen name = {profileName} component={ProfileScreen}/>
-        <Tab.Screen name = "Other Profile" component={OtherProfileScreen} />
-        <Tab.Screen name = "Map" component={MapScreen} />
+        {/* <Tab.Screen name = "Other Profile" component={OtherProfileScreen} /> */}
+        {/* <Tab.Screen name = "Map" component={MapScreen} /> */}
+        <Tab.Screen name = 'Go Somewhere' component={GoSomewhere}/>
 
 
 
