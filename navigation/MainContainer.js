@@ -55,7 +55,7 @@ export default function MainContainer() {
             } else if (rn === 'Map') {
               iconName = focused ? 'map' : 'map-outline';
             } else if (rn === 'Go Somewhere') {
-              iconName = focused ? 'map' : 'map-outline';
+              iconName = focused ? 'arrow-up' : 'arrow-up';
             }
 
             return <Ionicons name = {iconName} size = {size} color = {color}/>
