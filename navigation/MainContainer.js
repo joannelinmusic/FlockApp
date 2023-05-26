@@ -6,6 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { UserProvider } from './screen/UserProvider';
 import OtherProfileScreen from './screen/OtherProfileScreen'; 
 import MapScreen from './screen/MapScreen'; 
+import { ChakraProvider } from '@chakra-ui/react'
 
 
 
@@ -32,6 +33,7 @@ export default function MainContainer() {
     setShowMainContainer(true);
   };
   return (
+    
     <UserProvider>
     <NavigationContainer>
     {showMainContainer ? (
@@ -55,7 +57,7 @@ export default function MainContainer() {
             } else if (rn === 'Map') {
               iconName = focused ? 'map' : 'map-outline';
             } else if (rn === 'Go Somewhere') {
-              iconName = focused ? 'map' : 'map-outline';
+              iconName = focused ? 'arrow-up' : 'arrow-up';
             }
 
             return <Ionicons name = {iconName} size = {size} color = {color}/>
@@ -78,6 +80,7 @@ export default function MainContainer() {
       )}
     </NavigationContainer>
     </UserProvider>
+
   );
 }
 
