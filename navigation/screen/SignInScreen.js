@@ -1,10 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, Image, TextInput, StyleSheet, Button } from 'react-native';
 import { useAuth0 } from 'react-native-auth0';
+import { useNavigation } from '@react-navigation/native';
 import {  } from '@chakra-ui/react';
 import { UserContext } from './UserContext';
 
-const SignInScreen = () => {
+const SignInScreen = ( { setShowMainContainer } ) => {
+    const navigation = useNavigation(); 
+
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -24,6 +27,9 @@ const SignInScreen = () => {
             major: major,
             id: id,
         })
+
+        setShowMainContainer(true);
+
     }
 
     /*const LoginButton = () => {

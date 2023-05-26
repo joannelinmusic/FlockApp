@@ -38,7 +38,9 @@ function AuthStackNavigator({ setShowMainContainer }) {
       <Stack.Screen name="Auth">
         {(props) => <AuthScreen {...props} onButtonClick={handleWelcomeButtonClick} />}
       </Stack.Screen>
-      <Stack.Screen name="SignIn" component={SignInScreen} />
+      <Stack.Screen name="SignIn">
+  {(props) => <SignInScreen {...props} setShowMainContainer={setShowMainContainer} />}
+</Stack.Screen>
     </Stack.Navigator>
   );
 }
