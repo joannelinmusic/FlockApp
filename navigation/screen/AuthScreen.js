@@ -15,7 +15,7 @@ const loadFontsAsync = async () => {
   });
 };
 
-const AuthScreen = ({ onButtonClick }) => {
+const AuthScreen = ({ onButtonClick, navigation }) => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
   useEffect(() => {
@@ -24,6 +24,10 @@ const AuthScreen = ({ onButtonClick }) => {
 
   const handlePress = () => {
     onButtonClick();
+  };
+
+  const handleSignInPress = () => {
+    navigation.navigate('SignIn');
   };
 
   if (!fontsLoaded) {
@@ -38,7 +42,7 @@ const AuthScreen = ({ onButtonClick }) => {
       <Image style={styles.image} source={birdFlying} />
       <StatusBar style="auto" />
       <Button title="Get Started" onPress={handlePress} />
-      <Button title="Sign in" onPress={handlePress} />
+      <Button title="Sign in" onPress={handleSignInPress} />
     </View>
   );
 };

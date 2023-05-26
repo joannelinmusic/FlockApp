@@ -33,7 +33,7 @@
         "react-native-auth0",
         {
           "domain": "dev-peuenntsuvvw1b6v.us.auth0.com",
-          "customScheme": "YOUR_CUSTOM_SCHEME"
+          "customScheme": "flockapp"
         }
       ]
     ]
