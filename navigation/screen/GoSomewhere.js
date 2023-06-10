@@ -1,0 +1,122 @@
+
+import { Image, View, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet } from 'react-native';
+import { useState, useEffect } from 'react';
+import * as Location from 'expo-location';
+//import { FontAwesome } from 'react-native-vector-icons';
+import * as Font from 'expo-font';
+import {TextInput, Button, Alert} from 'react-native';
+import React from 'react';
+import geoBack from './geoBack.png';
+import requestButton from './reqButton.png'
+import requestBubble from './requestBubble.png'
+
+
+
+import yes from './yes.png'
+import no from './no.png'
+
+
+export default function App() {
+ const [endLocation, setEndLocation] = useState('');
+ const [address, setAddress] = useState();
+
+ /*const [location, setLocation] = useState();
+ const navigation = useNavigation();*/
+
+ /*
+ Location.setGoogleApiKey("AIzaSyD5GUOMMrDY5Ml8JOQ5j7z7p9f8GaGCDBg");
+
+
+ useEffect(() => { 
+   const getPermissions = async () => {
+     let { status } = await Location.requestForegroundPermissionsAsync();
+     if (status !== 'granted') {
+       console.log("Please grant location permissions");
+       return;
+     };
+     let currentLocation = await Location.getCurrentPositionAsync({});
+     setLocation(currentLocation);
+     console.log("Location:");
+     console.log(currentLocation);
+   };
+   getPermissions();
+ }, []);
+
+
+ const geocode = async () => {
+   const geocodedLocation = await Location.geocodeAsync(address);
+   console.log("Geocoded Address:");
+   console.log(geocodedLocation);
+ };
+ 
+
+ const reverseGeocode = async () => {
+   const reverseGeocodedAddress = await Location.reverseGeocodeAsync({
+     longitude: location.coords.longitude,
+     latitude: location.coords.latitude
+   });
+
+
+   console.log("Reverse Geocoded:");
+   console.log(reverseGeocodedAddress); */
+   return (
+    <View style={styles.container}>
+ 
+     <TextInput
+     placeholder="Enter your destination location"
+     value={address}
+     onChangeText={text => setEndLocation(text)} 
+     style={styles.inputTextbox}
+     />
+ 
+     
+         
+     
+      
+       
+    </View>
+  );
+ }; 
+ 
+ // const isBackgroundRed = true;
+
+
+ 
+
+
+const styles = StyleSheet.create({
+ container: {
+   flex: 0.75,
+   alignItems: 'center',
+   justifyContent: 'center',
+ },
+ text: {
+   textAlign: 'center',
+   fontSize: 10,
+   fontFamily: 'Pixel',
+ }, 
+ inputTextbox: {
+  height: 40,
+  borderColor: 'gray',
+  borderWidth: 1,
+  width: '80%',
+  marginBottom: 16,
+  padding: 8,
+}
+});
+
+
+const loadFontsAsync = async () => {
+  await Font.loadAsync({
+    'Righteous-Regular': require('../../assets/fonts/Righteous-Regular.ttf'),
+    'Nintendo': require('../../assets/fonts/RoSpritendoSemiboldBeta-vmVwZ.otf'),
+    'superMario': require('../../assets/fonts/SuperMarioBros-ov7d.ttf'),
+    'Pixel': require('../../assets/fonts/Pixeled.ttf'),
+  });
+};
+
+loadFontsAsync();
+

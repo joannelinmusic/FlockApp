@@ -11,6 +11,11 @@ export const UserProvider = ({ children }) => {
         id: '',
     });
 
+    const [location, EndLocation] = useState({
+        endLocation: '',
+    });
+
+
     return (
         <UserContext.Provider value={{ user, setUser }}>
             {children}

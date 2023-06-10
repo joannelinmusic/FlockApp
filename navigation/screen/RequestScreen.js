@@ -21,6 +21,7 @@ export default function App() {
   
  const [location, setLocation] = useState();
  const [address, setAddress] = useState();
+ const [endLocation, setEndLocation] = useState('');
  const navigation = useNavigation();
 
  Location.setGoogleApiKey("AIzaSyD5GUOMMrDY5Ml8JOQ5j7z7p9f8GaGCDBg");
@@ -65,6 +66,14 @@ export default function App() {
 
  return (
    <View style={styles.container}>
+
+    <TextInput
+    placeholder="Enter your destination location"
+    value={address}
+    onChangeText={text => setEndLocation(text)} 
+    style={styles.inputTextbox}
+    />
+
      <Image
           source={geoBack}
           style={{ width: '100%', height: '175%', position: 'absolute', top: -100, left: 0, bottom: 0, right: 0, zIndex: -1 }}
@@ -116,7 +125,15 @@ const styles = StyleSheet.create({
    textAlign: 'center',
    fontSize: 10,
    fontFamily: 'Pixel',
- },
+ }, 
+ inputTextbox: {
+  height: 40,
+  borderColor: 'gray',
+  borderWidth: 1,
+  width: '80%',
+  marginBottom: 16,
+  padding: 8,
+}
 });
 
 
