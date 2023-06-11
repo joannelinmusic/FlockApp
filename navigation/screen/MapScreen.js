@@ -104,7 +104,7 @@ const MapScreen = () => {
           />
           <TextInput
             style={styles.locationInput}
-            placeholder="Destination"
+            placeholder="Where Would You Like to Go?"
             onChangeText={text => setDestinationLocation(text)}
           />
           <Button title="Submit" onPress={submitLocations} />
