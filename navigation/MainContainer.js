@@ -29,6 +29,17 @@ const matchScreen = 'MatchScreen'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const MapStack = createStackNavigator();
+
+
+function MapStackNavigator() {
+  return (
+    <MapStack.Navigator>
+      <MapStack.Screen name="Map" component={MapScreen} />
+      <MapStack.Screen name="MatchScreen" component={MatchingScreen} />
+    </MapStack.Navigator>
+  );
+}
 
 function AuthStackNavigator({ setShowMainContainer }) {
   const handleWelcomeButtonClick = () => {
@@ -97,25 +108,13 @@ export default function MainContainer() {
         <Tab.Screen name = {profileName} component={ProfileScreen}/>
         <Tab.Screen name = {matchScreen} component={MatchingScreen}/>
         {/* <Tab.Screen name = "Other Profile" component={OtherProfileScreen} /> */}
-        <Tab.Screen name="Map">
-                {() => <Stack.Navigator>
-                  <Stack.Screen name="Map" component={MapScreen} />
-                  <Stack.Screen name="Auth">
-                    {(props) => <AuthScreen {...props} onButtonClick={handleWelcomeButtonClick} />}
-                  </Stack.Screen>
-                  <Stack.Screen name="SignIn">
-                    {(props) => <SignInScreen {...props} setShowMainContainer={setShowMainContainer} />}
-                  </Stack.Screen>
-                </Stack.Navigator>}
-              </Tab.Screen>
-            </Tab.Navigator>
-    ) : (
-
-      
-      <AuthStackNavigator setShowMainContainer={setShowMainContainer} />
-      )}
-    </NavigationContainer>
-    </UserProvider>
+        <Tab.Screen name="Map" component={MapStackNavigator} />
+        </Tab.Navigator>
+          ) : (
+            <AuthStackNavigator setShowMainContainer={setShowMainContainer} />
+          )}
+        </NavigationContainer>
+      </UserProvider>
     </Auth0Provider>
   );
 }

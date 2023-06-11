@@ -2,7 +2,7 @@ import { React, useState, useEffect} from 'react';
 import { View, TextInput, StyleSheet, FlatList, TouchableOpacity, navigation, Text, Button } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
-import { homeName } from './HomeScreen'; 
+import { Match } from './MatchingScreen'; 
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Notifications from 'expo-notifications';
 
@@ -74,30 +74,24 @@ const MapScreen = ({navigation}) => {
     }, []);
 
     const submitLocations = async () => {
-      /*try {
-        // You can add code here to convert the destination location to coordinates and 
-        // use it in your app, e.g., draw a route from current location to the destination.
-        let destinationCoords = await Location.geocodeAsync(destinationLocation);
-        console.log(destinationCoords);
-      } catch (error) {
-        console.error(error);
-      }*/
       const destinationCoords = await Location.geocodeAsync(destinationLocation);
       console.log(destinationCoords);
     
+      setRecentSearches(prev => {
+        let updatedSearches = [destinationLocation, ...prev];
+        if (updatedSearches.length > 3) {
+          updatedSearches = updatedSearches.slice(0, 3); // only keep top 3 searches
+        }
+        return updatedSearches;
+      });
+    
 
-    setRecentSearches(prev => {
-      let updatedSearches = [destinationLocation, ...prev];
-      if (updatedSearches.length > 3) {
-        updatedSearches = updatedSearches.slice(0, 3); // only keep top 3 searches
-      }
-      return updatedSearches;
-    });
-  }
-
-  const handleRecentSearchPress = (search) => {
-    navigation.navigate( homeName , { selectedSearch: search });
-  }
+    }
+    
+    const handleRecentSearchPress = (search) => {
+      navigation.navigate('MatchScreen', { selectedSearch: search });
+    }
+    
 
   return (
     <View style={styles.container}>
