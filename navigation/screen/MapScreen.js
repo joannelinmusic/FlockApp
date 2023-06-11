@@ -2,7 +2,9 @@ import { React, useState, useEffect} from 'react';
 import { View, TextInput, StyleSheet, FlatList, TouchableOpacity, Text, Button } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
+import Icon from 'react-native-vector-icons/Ionicons';
 import * as Notifications from 'expo-notifications';
+
 
 
 
@@ -29,6 +31,7 @@ const MapScreen = () => {
     longitude: 0,
   });*/
   const [region, setRegion] = useState(null);
+  const [recentSearches, setRecentSearches] = useState([]);
     
   Location.setGoogleApiKey("AIzaSyD5GUOMMrDY5Ml8JOQ5j7z7p9f8GaGCDBg");
 
@@ -80,66 +83,107 @@ const MapScreen = () => {
       }*/
       const destinationCoords = await Location.geocodeAsync(destinationLocation);
       console.log(destinationCoords);
-    }
+    
 
-    return (
-      <View style={styles.container}>
-        {region && (
-          <MapView
-            style={styles.map}
-            initialRegion={region}
-          >
-            <Marker
-              coordinate={region}
-              title="Your Location"
-            />
-          </MapView>
-        )}
-        <View style={styles.locationsContainer}>
-          <TextInput
-            style={styles.locationInput}
-            placeholder="Current location"
-            value={currentLocation}
-            onChangeText={text => setCurrentLocation(text)}
+    setRecentSearches(prev => {
+      let updatedSearches = [destinationLocation, ...prev];
+      if (updatedSearches.length > 3) {
+        updatedSearches = updatedSearches.slice(0, 3); // only keep top 3 searches
+      }
+      return updatedSearches;
+    });
+
+    const handleRecentSearchPress = (location) => {
+      // Handle navigation
+      // Replace "DestinationScreen" with the name of the target screen
+      navigation.navigate("Request", { location });
+    }
+  }
+
+  return (
+    <View style={styles.container}>
+      {region && (
+        <MapView
+          style={styles.map}
+          initialRegion={region}
+        >
+          <Marker
+            coordinate={region}
+            title="Your Location"
           />
-          <TextInput
-            style={styles.locationInput}
-            placeholder="Where Would You Like to Go?"
-            onChangeText={text => setDestinationLocation(text)}
-          />
-          <Button title="Submit" onPress={submitLocations} />
+        </MapView>
+      )}
+      <View style={styles.locationsContainer}>
+        <TextInput
+          style={styles.locationInput}
+          placeholder="Current location"
+          value={currentLocation}
+          onChangeText={text => setCurrentLocation(text)}
+        />
+        <TextInput
+          style={styles.locationInput}
+          placeholder="Where Would You Like to Go?"
+          onChangeText={text => setDestinationLocation(text)}
+        />
+        <Button title="Submit" onPress={submitLocations} />
+        <View>
+          <Text style={styles.recentSearchTitle}>Recent Searches:</Text>
+          {recentSearches.map(search => (
+            <TouchableOpacity style={styles.recentSearchItem} onPress={() => handleRecentSearchPress(search)}>
+              <Icon name="location-outline" size={20} />
+              <Text style={styles.recentSearchText}>{search}</Text>
+            </TouchableOpacity>
+          ))}
         </View>
       </View>
-    );
-  };
+    </View>
+  );
+};
+       
   
   
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-    },
-    map: {
-      flex: 1,
-    },
-    locationsContainer: {
-      position: 'absolute',
-      top: 50,
-      left: 20,
-      right: 20,
-      backgroundColor: 'rgba(255, 255, 255, 0.9)',
-      padding: 10,
-      borderRadius: 10,
-    },
-    locationInput: {
-      height: 40,
-      borderColor: 'gray',
-      borderWidth: 1,
-      marginBottom: 10,
-      paddingLeft: 10,
-      borderRadius: 5,
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  map: {
+    flex: 1,
+  },
+  locationsContainer: {
+    position: 'absolute',
+    top: 50,
+    left: 20,
+    right: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    padding: 10,
+    borderRadius: 10,
+  },
+  locationInput: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingLeft: 10,
+    borderRadius: 5,
+  },
+  recentSearchTitle: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    marginTop: 10,
+  },
+  recentSearchItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+    padding: 10,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 5,
+  },
+  recentSearchText: {
+    marginLeft: 10,
+  },
+});
 
 export default MapScreen;
 
