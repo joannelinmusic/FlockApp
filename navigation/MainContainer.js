@@ -17,6 +17,7 @@ import RequestScreen from './screen/RequestScreen';
 import ProfileScreen from './screen/ProfileScreen';
 import AuthScreen from './screen/AuthScreen';
 import SignInScreen from './screen/SignInScreen';
+import MatchingScreen from './screen/MatchingScreen'
 
 
 //Screen Names
@@ -24,6 +25,7 @@ const homeName = 'Home';
 const signUpName = 'Sign Up';
 const requestName = 'Request';
 const profileName = 'Profile';
+const matchScreen = 'MatchScreen'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -81,6 +83,8 @@ export default function MainContainer() {
               iconName = focused ? 'person' : 'person-circle-outline';
             } else if (rn === 'Map') {
               iconName = focused ? 'map' : 'map-outline';
+            } else if (rn === 'MatchScreen') {
+              iconName = focused ? 'map' : 'map-outline';
             } 
 
             return <Ionicons name = {iconName} size = {size} color = {color}/>
@@ -89,11 +93,22 @@ export default function MainContainer() {
 
         <Tab.Screen name = {homeName} component={HomeScreen}/>
         <Tab.Screen name = {signUpName} component={SignInScreen}/> 
-        <Tab.Screen name = {requestName} component={RequestScreen}/>
+        { /* <Tab.Screen name = {requestName} component={RequestScreen}/> */}
         <Tab.Screen name = {profileName} component={ProfileScreen}/>
+        <Tab.Screen name = {matchScreen} component={MatchingScreen}/>
         {/* <Tab.Screen name = "Other Profile" component={OtherProfileScreen} /> */}
-        <Tab.Screen name = "Map" component={MapScreen} />
-      </Tab.Navigator>
+        <Tab.Screen name="Map">
+                {() => <Stack.Navigator>
+                  <Stack.Screen name="Map" component={MapScreen} />
+                  <Stack.Screen name="Auth">
+                    {(props) => <AuthScreen {...props} onButtonClick={handleWelcomeButtonClick} />}
+                  </Stack.Screen>
+                  <Stack.Screen name="SignIn">
+                    {(props) => <SignInScreen {...props} setShowMainContainer={setShowMainContainer} />}
+                  </Stack.Screen>
+                </Stack.Navigator>}
+              </Tab.Screen>
+            </Tab.Navigator>
     ) : (
 
       

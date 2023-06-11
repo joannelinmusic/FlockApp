@@ -1,7 +1,8 @@
 import { React, useState, useEffect} from 'react';
-import { View, TextInput, StyleSheet, FlatList, TouchableOpacity, Text, Button } from 'react-native';
+import { View, TextInput, StyleSheet, FlatList, TouchableOpacity, navigation, Text, Button } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
+import { homeName } from './HomeScreen'; 
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Notifications from 'expo-notifications';
 
@@ -20,7 +21,7 @@ Notifications.setNotificationHandler({
   // Reminder To Make Phone Have a Vibrating Notification
   // Also, the repeating condition is an an temporary until we implement backend to form the time~sensitive notification.
 
-const MapScreen = () => {
+const MapScreen = ({navigation}) => {
     const [location, setLocation] = useState(null);
     // Assuming the condition to remove the notification is after 1 hour
     const ONE_HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
@@ -92,12 +93,10 @@ const MapScreen = () => {
       }
       return updatedSearches;
     });
+  }
 
-    const handleRecentSearchPress = (location) => {
-      // Handle navigation
-      // Replace "DestinationScreen" with the name of the target screen
-      navigation.navigate("Request", { location });
-    }
+  const handleRecentSearchPress = (search) => {
+    navigation.navigate( homeName , { selectedSearch: search });
   }
 
   return (
@@ -128,12 +127,16 @@ const MapScreen = () => {
         <Button title="Submit" onPress={submitLocations} />
         <View>
           <Text style={styles.recentSearchTitle}>Recent Searches:</Text>
-          {recentSearches.map(search => (
-            <TouchableOpacity style={styles.recentSearchItem} onPress={() => handleRecentSearchPress(search)}>
-              <Icon name="location-outline" size={20} />
-              <Text style={styles.recentSearchText}>{search}</Text>
-            </TouchableOpacity>
-          ))}
+          {recentSearches.map((search, index) => (
+  <TouchableOpacity 
+    key={index}  // Add this line
+    style={styles.recentSearchItem} 
+    onPress={() => handleRecentSearchPress(search)}>
+    <Icon name="location-outline" size={20} />
+    <Text style={styles.recentSearchText}>{search}</Text>
+  </TouchableOpacity>
+))}
+
         </View>
       </View>
     </View>
