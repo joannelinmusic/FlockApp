@@ -86,7 +86,7 @@ export default function App() {
      <Button title="Send Location" onPress={reverseGeocode} style={{ zIndex: 2 }}
      />
 
-
+    
       <Image
           source={requestButton}
           style={{ width: '100%', height: '45%', position: 'absolute', top: 148, zIndex: -1 }}
