@@ -8,6 +8,7 @@ import { UserProvider } from './screen/UserProvider';
 import OtherProfileScreen from './screen/OtherProfileScreen'; 
 import MapScreen from './screen/MapScreen'; 
 import {useAuth0, Auth0Provider} from 'react-native-auth0';
+import Geocoder from 'react-native-geocoding';
 
 
 //Screen
@@ -93,7 +94,7 @@ export default function MainContainer() {
         <Tab.Screen name = {requestName} component={RequestScreen}/>
         <Tab.Screen name = {profileName} component={ProfileScreen}/>
         {/* <Tab.Screen name = "Other Profile" component={OtherProfileScreen} /> */}
-        {/* <Tab.Screen name = "Map" component={MapScreen} /> */}
+        <Tab.Screen name = "Map" component={MapScreen} />
         <Tab.Screen name = 'Go Somewhere' component={GoSomewhere}/>
       </Tab.Navigator>
     ) : (
