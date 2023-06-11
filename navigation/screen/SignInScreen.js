@@ -16,35 +16,62 @@ const SignInScreen = ( { setShowMainContainer } ) => {
     const [id, setId] = useState('');
 
     const { setUser } = useContext(UserContext);
+    const { authorize } = useAuth0();
 
-    const submitForm = () => {
-        // handling form submission here
-        setUser({
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            age: age,
-            major: major,
-            id: id,
-        })
 
-        setShowMainContainer(true);
-
-    }
-
-    /*const LoginButton = () => {
-        const { authorize } = useAuth0();
-    
-        const onPress = async () => {
-          try {
-            await authorize({ scope: 'openid profile email' }, { customScheme: 'flockapp' });
-          } catch (e) {
+   
+        /*
+        try {
+            const credentials = await authorize({ scope: 'openid profile email' }, { customScheme: 'flockapp' });
+            console.log('Access Token: ', credentials.accessToken);
+            const user = { 
+                firstName: credentials.given_name,
+                lastName: credentials.family_name,
+                email: credentials.email,
+                // Age, major and id fields aren't typically provided by Auth0.
+                // You'll need to handle these separately.
+                age: "",
+                major: "",
+                id: "" 
+            };
+            setUser(user);
+            setShowMainContainer(true);
+        } catch (e) {
             console.log(e);
-          }
-        };
+        }
     
-        return <Button onPress={onPress} title="Log in" />
-    }*/
+    
+    return (
+        <View style={styles.container}>
+            <Image source={require('./loginFlock.png')} style={styles.image} />
+            <Text>Sign in Screen </Text>
+            <Button title="Log in" onPress={submitForm} />
+        </View>
+    );*/
+// login action
+const handleLogin = async () => {
+    try {
+        const credentials = await authorize({ scope: 'openid profile email' }, { customScheme: 'flockapp' });
+        console.log('Access Token: ', credentials.accessToken);
+        setShowMainContainer(true); // on successful login, show main container
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+// form submit action
+const submitForm = () => {
+    setUser({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        age: age,
+        major: major,
+        id: id,
+    });
+};
+    
+    
 
     return (
         <View style={styles.container}>
@@ -90,7 +117,8 @@ const SignInScreen = ( { setShowMainContainer } ) => {
                 value={id} 
                 onChangeText={text => setId(text)} 
             />
-            <Button title="Submit" onPress={submitForm} />
+             <Button title="Submit" onPress={submitForm} />
+            <Button title="Log in with Auth0" onPress={handleLogin} />
         </View>
     );
 }

@@ -7,7 +7,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { UserProvider } from './screen/UserProvider';
 import OtherProfileScreen from './screen/OtherProfileScreen'; 
 import MapScreen from './screen/MapScreen'; 
-import { ChakraProvider } from '@chakra-ui/react'
 import {useAuth0, Auth0Provider} from 'react-native-auth0';
 
 
@@ -54,7 +53,11 @@ export default function MainContainer() {
     setShowMainContainer(true);
   };
   return (
-    <Auth0Provider domain={"dev-peuenntsuvvw1b6v.us.auth0.com"} clientId={"MxyC17XiyTDvJkb5VVunG1TH9LNfVvRC"}>
+    <Auth0Provider
+    domain="YOUR_AUTH0_DOMAIN"
+    clientId="YOUR_AUTH0_CLIENT_ID"
+  
+    >
     <UserProvider>
     <NavigationContainer>
     {showMainContainer ? (
