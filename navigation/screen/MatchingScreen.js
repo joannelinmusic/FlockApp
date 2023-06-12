@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
 import { LinearGradient } from 'expo-linear-gradient';
+//import MeetupMap from './meetupMap';
 
 const cards = [
     {
@@ -44,9 +45,12 @@ const NoMoreCards = () => (
     </View>
 );
 
-export default function MatchingScreen() {
+export default function MatchingScreen({navigation}) {
     const handleYup = (card) => {
         console.log(`Yup for ${card.name}`)
+        navigation.navigate('MeetUpMap', { 
+            destination: { latitude: 37.7749, longitude: -122.4194 },  // Example coordinates
+        });
     }
 
     const handleNope = (card) => {

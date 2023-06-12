@@ -17,7 +17,8 @@ import RequestScreen from './screen/RequestScreen';
 import ProfileScreen from './screen/ProfileScreen';
 import AuthScreen from './screen/AuthScreen';
 import SignInScreen from './screen/SignInScreen';
-import MatchingScreen from './screen/MatchingScreen'
+import MatchingScreen from './screen/MatchingScreen';
+import meetupMapScreen from './screen/meetupMap'
 
 
 //Screen Names
@@ -25,7 +26,8 @@ const homeName = 'Home';
 const signUpName = 'Sign Up';
 const requestName = 'Request';
 const profileName = 'Profile';
-const matchScreen = 'MatchScreen'
+const matchScreen = 'MatchScreen';
+const meetupMap = 'MeetUpMap'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -37,6 +39,7 @@ function MapStackNavigator() {
     <MapStack.Navigator>
       <MapStack.Screen name="Map" component={MapScreen} />
       <MapStack.Screen name="MatchScreen" component={MatchingScreen} />
+      <MapStack.Screen name="MeetUpMap" component={meetupMapScreen} />
     </MapStack.Navigator>
   );
 }
