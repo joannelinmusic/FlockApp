@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, Image, TextInput, StyleSheet, Button } from 'react-native';
+import { View, Text, Image, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { useAuth0 } from 'react-native-auth0';
 import { useNavigation } from '@react-navigation/native';
-import {  } from '@chakra-ui/react';
 import { UserContext } from './UserContext';
+import { LinearGradient } from 'expo-linear-gradient';
+import { bird } from './signInBird.gif';
 
 const SignInScreen = ( { setShowMainContainer } ) => {
     const navigation = useNavigation(); 
@@ -48,6 +49,7 @@ const SignInScreen = ( { setShowMainContainer } ) => {
             <Button title="Log in" onPress={submitForm} />
         </View>
     );*/
+    
 // login action
 const handleLogin = async () => {
     try {
@@ -69,58 +71,69 @@ const submitForm = () => {
         major: major,
         id: id,
     });
+
+    setShowMainContainer(true); 
 };
     
     
 
-    return (
-        <View style={styles.container}>
-            <Image source={require('./loginFlock.png')} style={styles.image} />
-            <Text>Sign in Screen </Text>
-            <View style={styles.row}>
-                <TextInput 
-                    style={styles.inputHalf} 
-                    placeholder="First Name" 
-                    value={firstName} 
-                    onChangeText={text => setFirstName(text)} 
-                />
-                <TextInput 
-                    style={styles.inputHalf} 
-                    placeholder="Last Name" 
-                    value={lastName} 
-                    onChangeText={text => setLastName(text)} 
-                />
-            </View>
+return (
+    <LinearGradient
+        colors={['#8BB0E9', '#FAB3E5']}
+        start={{ x: 1.75, y: .75}}
+        end={{ x: .5, y: 0 }}
+        style={styles.container}
+    >
+        <Image source={require('./signInBird.gif')} style={styles.image} />
+        <Text style={styles.title}>Sign Up</Text>
+        <View style={styles.row}>
             <TextInput 
-                style={styles.inputFull} 
-                placeholder="Email" 
-                value={email} 
-                onChangeText={text => setEmail(text)} 
+                style={styles.inputHalf} 
+                placeholder="First Name" 
+                value={firstName} 
+                onChangeText={text => setFirstName(text)} 
             />
-            <View style={styles.row}>
-                <TextInput 
-                    style={styles.inputHalf} 
-                    placeholder="Age" 
-                    value={age} 
-                    onChangeText={text => setAge(text)} 
-                />
-                <TextInput 
-                    style={styles.inputHalf} 
-                    placeholder="Major" 
-                    value={major} 
-                    onChangeText={text => setMajor(text)} 
-                />
-            </View>
             <TextInput 
-                style={styles.inputFull} 
-                placeholder="ID Number" 
-                value={id} 
-                onChangeText={text => setId(text)} 
+                style={styles.inputHalf} 
+                placeholder="Last Name" 
+                value={lastName} 
+                onChangeText={text => setLastName(text)} 
             />
-             <Button title="Submit" onPress={submitForm} />
-            <Button title="Log in with Auth0" onPress={handleLogin} />
         </View>
-    );
+        <TextInput 
+            style={styles.inputFull} 
+            placeholder="Email" 
+            value={email} 
+            onChangeText={text => setEmail(text)} 
+        />
+        <View style={styles.row}>
+            <TextInput 
+                style={styles.inputHalf} 
+                placeholder="Age" 
+                value={age} 
+                onChangeText={text => setAge(text)} 
+            />
+            <TextInput 
+                style={styles.inputHalf} 
+                placeholder="Major" 
+                value={major} 
+                onChangeText={text => setMajor(text)} 
+            />
+        </View>
+        <TextInput 
+            style={styles.inputFull} 
+            placeholder="ID Number" 
+            value={id} 
+            onChangeText={text => setId(text)} 
+        />
+        <TouchableOpacity style={styles.button} onPress={submitForm}>
+            <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
+        {/* <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <Text style={styles.buttonText}>Log in with Auth0</Text>
+        </TouchableOpacity> */}
+    </LinearGradient>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -131,9 +144,10 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     image: {
-        width: 300, 
+        width: '100%', 
         height: 200, 
-        marginBottom: 32,
+        marginBottom: 50,
+        marginTop: 10, 
     },
     row: {
         flexDirection: 'row',
@@ -141,22 +155,53 @@ const styles = StyleSheet.create({
         width: '100%',
         marginBottom: 16,
     },
-    inputHalf: {
+    title: {
+        fontFamily: 'Courier',
+        fontSize: 35,
+        fontWeight: 'bold',
+        color: 'white',
+        marginBottom: 30,
+        shadowColor: '#000', 
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
+      },
+      inputHalf: {
         flex: 1,
         height: 40,
         borderColor: 'gray',
-        borderWidth: 1,
+        borderWidth: 0, 
         padding: 8,
-        
+        marginBottom: -5, 
+        borderRadius: 10,
+        backgroundColor: 'white',
+        marginRight: 5, 
+        marginLeft: 5, 
     },
     inputFull: {
         height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    width: '100%',
-    marginBottom: 16,
-    padding: 8,
-    }
-});
-
-export default SignInScreen;
+        borderColor: 'gray',
+        borderWidth: 0, 
+        width: '97.5%',
+        marginBottom: 10, 
+        padding: 8,
+        borderRadius: 10,
+        backgroundColor: 'white',
+    },
+    button: {
+        backgroundColor: '#ffffff',
+        padding: 15,
+        borderRadius: 10,
+        marginTop: 30,
+        marginBottom: 15,
+        alignItems: 'center',
+        width: '100%',
+    },
+      buttonText: {
+        fontSize: 16,
+        color: '#8BB0E9',
+        fontWeight: 'bold',
+      },
+    });
+    
+    export default SignInScreen;

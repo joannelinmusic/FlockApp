@@ -17,7 +17,9 @@ import RequestScreen from './screen/RequestScreen';
 import ProfileScreen from './screen/ProfileScreen';
 import AuthScreen from './screen/AuthScreen';
 import SignInScreen from './screen/SignInScreen';
-import MatchingScreen from './screen/MatchingScreen'
+import MatchingScreen from './screen/MatchingScreen';
+import meetupMapScreen from './screen/meetupMap'
+import TripCompleted from './screen/TripCompleted';
 
 
 //Screen Names
@@ -25,7 +27,9 @@ const homeName = 'Home';
 const signUpName = 'Sign Up';
 const requestName = 'Request';
 const profileName = 'Profile';
-const matchScreen = 'MatchScreen'
+const matchScreen = 'MatchScreen';
+const meetupMap = 'MeetUpMap';
+const tripCompleted = 'tripCompleted'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -37,6 +41,8 @@ function MapStackNavigator() {
     <MapStack.Navigator>
       <MapStack.Screen name="Map" component={MapScreen} />
       <MapStack.Screen name="MatchScreen" component={MatchingScreen} />
+      <MapStack.Screen name="MeetUpMap" component={meetupMapScreen} />
+      <MapStack.Screen name="tripCompleted" component={TripCompleted} />
     </MapStack.Navigator>
   );
 }
@@ -96,6 +102,8 @@ export default function MainContainer() {
               iconName = focused ? 'map' : 'map-outline';
             } else if (rn === 'MatchScreen') {
               iconName = focused ? 'map' : 'map-outline';
+            } else if (rn === 'tripCompleted') {
+              iconName = focused ? 'map' : 'map-outline';
             } 
 
             return <Ionicons name = {iconName} size = {size} color = {color}/>
@@ -103,11 +111,14 @@ export default function MainContainer() {
         })}>
 
         <Tab.Screen name = {homeName} component={HomeScreen}/>
-        <Tab.Screen name = {signUpName} component={SignInScreen}/> 
-        { /* <Tab.Screen name = {requestName} component={RequestScreen}/> */}
         <Tab.Screen name = {profileName} component={ProfileScreen}/>
-        <Tab.Screen name = {matchScreen} component={MatchingScreen}/>
-        {/* <Tab.Screen name = "Other Profile" component={OtherProfileScreen} /> */}
+        { /* Screens that Are Currently Being Worked on Are Commented Out Here:
+         <Tab.Screen name = 'tripCompleted' component={TripCompleted}/>
+         <Tab.Screen name = {matchScreen} component={MatchingScreen}/>
+         <Tab.Screen name = {signUpName} component={SignInScreen}/>
+         <Tab.Screen name = {requestName} component={RequestScreen}/>
+         <Tab.Screen name = "Other Profile" component={OtherProfileScreen} /> 
+         */}
         <Tab.Screen name="Map" component={MapStackNavigator} />
         </Tab.Navigator>
           ) : (
