@@ -9,8 +9,6 @@ import RequestScreen from './RequestScreen';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-// TO DD: Change UI from specific numbers to percentages so it looks good on all types of phones & platforms
-
 export default function HomeScreen({}){
 
   const navigation = useNavigation();

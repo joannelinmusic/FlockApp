@@ -17,20 +17,12 @@ Notifications.setNotificationHandler({
   }),
 });
 
-// TO DO:
-  // Reminder To Make Phone Have a Vibrating Notification
-  // Also, the repeating condition is an an temporary until we implement backend to form the time~sensitive notification.
 
 const MapScreen = ({navigation}) => {
     const [location, setLocation] = useState(null);
-    // Assuming the condition to remove the notification is after 1 hour
     const ONE_HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
     const [currentLocation, setCurrentLocation] = useState('');
   const [destinationLocation, setDestinationLocation] = useState('');
-  /*const [coordinates, setCoordinates] = useState({
-    latitude: 0,
-    longitude: 0,
-  });*/
   const [region, setRegion] = useState(null);
   const [recentSearches, setRecentSearches] = useState([]);
     

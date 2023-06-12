@@ -36,11 +36,8 @@ const AuthScreen = ({ onButtonClick, navigation }) => {
 
   return (
     <LinearGradient
-        // Gradient colors from pastel teal to pastel purple-pink
         colors={['#8BB0E9', '#FAB3E5']}
-        // Start color will be at top left
         start={{ x: 1.75, y: .75}}
-        // End color will be at bottom right
         end={{ x: .5, y: 0 }}
         style={styles.container}
     >

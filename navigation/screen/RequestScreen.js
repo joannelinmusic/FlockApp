@@ -5,7 +5,6 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 import { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
-//import { FontAwesome } from 'react-native-vector-icons';
 import * as Font from 'expo-font';
 import {TextInput, Button, Alert} from 'react-native';
 import React from 'react';

@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: 'rgba(0,0,0,0.7)', // This will give a semi-transparent dark tint to the background
+    backgroundColor: 'rgba(0,0,0,0.7)', // semitransparent dark tint to the background
   },
   modalView: {
     margin: 20,
