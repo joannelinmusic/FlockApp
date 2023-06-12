@@ -49,7 +49,7 @@ export default function MatchingScreen({navigation}) {
     const handleYup = (card) => {
         console.log(`Yup for ${card.name}`)
         navigation.navigate('MeetUpMap', { 
-            destination: { latitude: 37.7749, longitude: -122.4194 },  // Example coordinates
+            destination: { latitude: 37.8702, longitude: -122.2595 },  // Example coordinates
         });
     }
 
