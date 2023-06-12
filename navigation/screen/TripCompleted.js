@@ -2,13 +2,20 @@ import React, { useState } from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import StarRating from 'react-native-star-rating';
 import MapView, { Marker } from 'react-native-maps';
+import { useNavigation } from '@react-navigation/native';
 
 const TripCompleted = ({ route }) => {
+  const navigation = useNavigation();
   const { destination } = route.params;
 
   const [rating, setRating] = useState(0);
   const [modalVisible, setModalVisible] = useState(true);
 
+  const handleClose = () => {
+    setModalVisible(!modalVisible);
+    navigation.navigate('Home'); 
+  };
+  
   return (
     <View style={{ flex: 1 }}>
       <MapView
@@ -43,7 +50,7 @@ const TripCompleted = ({ route }) => {
             />
             <TouchableOpacity
               style={{...styles.button, ...styles.uiAuthButtonStyle}}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={handleClose} 
             >
               <Text style={styles.textStyle}>Close</Text>
             </TouchableOpacity>
