@@ -23,10 +23,10 @@ export default function HomeScreen({}){
         />
        <TouchableOpacity
         style={styles.centeredContainer}
-        onPress={() => navigation.navigate('Request')}
+        onPress={() => navigation.navigate('Map')}
       >
         <Image
-          source={pixelBubble} // Tap to start
+          source={pixelBubble} 
           style={styles.bubbleImage}
         />
       </TouchableOpacity>
