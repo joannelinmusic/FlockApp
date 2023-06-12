@@ -4,6 +4,7 @@ import { useAuth0 } from 'react-native-auth0';
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from './UserContext';
 import { LinearGradient } from 'expo-linear-gradient';
+import { bird } from './signInBird.gif';
 
 const SignInScreen = ( { setShowMainContainer } ) => {
     const navigation = useNavigation(); 
@@ -83,8 +84,8 @@ return (
         end={{ x: .5, y: 0 }}
         style={styles.container}
     >
-        <Image source={require('./loginFlock.png')} style={styles.image} />
-        <Text style={styles.title}>Sign In</Text>
+        <Image source={require('./signInBird.gif')} style={styles.image} />
+        <Text style={styles.title}>Sign Up</Text>
         <View style={styles.row}>
             <TextInput 
                 style={styles.inputHalf} 
@@ -143,9 +144,10 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     image: {
-        width: 300, 
+        width: '100%', 
         height: 200, 
-        marginBottom: 32,
+        marginBottom: 50,
+        marginTop: 10, 
     },
     row: {
         flexDirection: 'row',
@@ -154,7 +156,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
     },
     title: {
-        fontFamily: 'Pixel',
+        fontFamily: 'Courier',
         fontSize: 35,
         fontWeight: 'bold',
         color: 'white',
@@ -170,18 +172,18 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderWidth: 0, 
         padding: 8,
-        marginBottom: -5, // reduce bottom margin for closer vertical spacing
+        marginBottom: -5, 
         borderRadius: 10,
         backgroundColor: 'white',
-        marginRight: 5, // Add right margin for horizontal spacing
-        marginLeft: 5, // Add left margin for horizontal spacing
+        marginRight: 5, 
+        marginLeft: 5, 
     },
     inputFull: {
         height: 40,
         borderColor: 'gray',
         borderWidth: 0, 
         width: '97.5%',
-        marginBottom: 10, // reduce bottom margin for closer vertical spacing
+        marginBottom: 10, 
         padding: 8,
         borderRadius: 10,
         backgroundColor: 'white',
@@ -190,7 +192,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         padding: 15,
         borderRadius: 10,
-        marginTop: 30, // increase top margin for more space between last input and button
+        marginTop: 30,
         marginBottom: 15,
         alignItems: 'center',
         width: '100%',

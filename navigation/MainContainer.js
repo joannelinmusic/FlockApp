@@ -106,11 +106,13 @@ export default function MainContainer() {
         })}>
 
         <Tab.Screen name = {homeName} component={HomeScreen}/>
-        <Tab.Screen name = {signUpName} component={SignInScreen}/> 
-        { /* <Tab.Screen name = {requestName} component={RequestScreen}/> */}
         <Tab.Screen name = {profileName} component={ProfileScreen}/>
-        <Tab.Screen name = {matchScreen} component={MatchingScreen}/>
-        {/* <Tab.Screen name = "Other Profile" component={OtherProfileScreen} /> */}
+        { /* Screens that Are Currently Being Worked on Are Commented Out Here:
+         <Tab.Screen name = {matchScreen} component={MatchingScreen}/>
+         <Tab.Screen name = {signUpName} component={SignInScreen}/>
+         <Tab.Screen name = {requestName} component={RequestScreen}/>
+         <Tab.Screen name = "Other Profile" component={OtherProfileScreen} /> 
+         */}
         <Tab.Screen name="Map" component={MapStackNavigator} />
         </Tab.Navigator>
           ) : (
