@@ -1,15 +1,12 @@
-// 'AIzaSyD5GUOMMrDY5Ml8JOQ5j7z7p9f8GaGCDBg';
-
 import React, { useEffect, useState } from 'react';
+import { Button } from 'react-native';
 import * as Location from 'expo-location';
 import MapView, { Polyline, Marker } from 'react-native-maps';
 import { decode } from '@mapbox/polyline';
 
-const MeetupMap = ({ route }) => {
+const MeetupMap = ({ route, navigation }) => {
   const { destination } = route.params;
   const GOOGLE_MAPS_APIKEY = 'AIzaSyD5GUOMMrDY5Ml8JOQ5j7z7p9f8GaGCDBg';
-
-  //const otherPersonLocation = { latitude: 37.8719, longitude: -122.2585 }; // New York, for example
 
   const [location, setLocation] = useState(null);
   const [coords, setCoords] = useState([]);
@@ -44,8 +41,12 @@ const MeetupMap = ({ route }) => {
         longitude: point[1]
       }
     })
-    console.log(coords);  // log user's location
     setCoords(coords);
+  };
+
+  const handleDevSkip = () => {
+      setLocation(destination);
+      navigation.navigate('tripCompleted', { destination: destination });
   };
 
   return (
@@ -70,6 +71,9 @@ const MeetupMap = ({ route }) => {
     strokeWidth={3} 
     strokeColor="hotpink" 
 />
+
+      {/* Developer Skip Button */}
+      <Button title="Developer Skip" onPress={handleDevSkip} />
 
     </MapView>
   );
