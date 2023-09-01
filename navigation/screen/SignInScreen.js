@@ -18,37 +18,6 @@ const SignInScreen = ( { setShowMainContainer } ) => {
 
     const { setUser } = useContext(UserContext);
     const { authorize } = useAuth0();
-
-
-   
-        /*
-        try {
-            const credentials = await authorize({ scope: 'openid profile email' }, { customScheme: 'flockapp' });
-            console.log('Access Token: ', credentials.accessToken);
-            const user = { 
-                firstName: credentials.given_name,
-                lastName: credentials.family_name,
-                email: credentials.email,
-                // Age, major and id fields aren't typically provided by Auth0.
-                // You'll need to handle these separately.
-                age: "",
-                major: "",
-                id: "" 
-            };
-            setUser(user);
-            setShowMainContainer(true);
-        } catch (e) {
-            console.log(e);
-        }
-    
-    
-    return (
-        <View style={styles.container}>
-            <Image source={require('./loginFlock.png')} style={styles.image} />
-            <Text>Sign in Screen </Text>
-            <Button title="Log in" onPress={submitForm} />
-        </View>
-    );*/
     
 // login action
 const handleLogin = async () => {
@@ -63,6 +32,11 @@ const handleLogin = async () => {
 
 // form submit action
 const submitForm = () => {
+    if (!email.endsWith('.edu')) {
+        alert('Please provide a valid .edu email address.');
+        return;
+    }
+
     setUser({
         firstName: firstName,
         lastName: lastName,
@@ -129,9 +103,6 @@ return (
         <TouchableOpacity style={styles.button} onPress={submitForm}>
             <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity style={styles.button} onPress={handleLogin}>
-            <Text style={styles.buttonText}>Log in with Auth0</Text>
-        </TouchableOpacity> */}
     </LinearGradient>
   );
 }

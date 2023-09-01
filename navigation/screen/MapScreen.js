@@ -30,7 +30,6 @@ const MapScreen = ({navigation}) => {
 
     useEffect(() => {
       (async () => {
-        //let { status } = await Location.requestForegroundPermissionsAsync();
         const { status } = await Notifications.requestPermissionsAsync();
         if (status !== 'granted') {
           console.error('Permission to access location was denied');
