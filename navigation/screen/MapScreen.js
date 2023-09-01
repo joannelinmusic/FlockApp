@@ -7,8 +7,7 @@ import { Match } from './MatchingScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
-
-
+import { locations } from './locations';
 
 
 Notifications.setNotificationHandler({
@@ -28,6 +27,7 @@ const MapScreen = ({navigation}) => {
   const [destinationLocation, setDestinationLocation] = useState('');
   const [region, setRegion] = useState(null);
   const [recentSearches, setRecentSearches] = useState([]);
+  const [filteredLocations, setFilteredLocations] = useState([]);
     
   if (GOOGLE_API_KEY) {
     Location.setGoogleApiKey(GOOGLE_API_KEY);
@@ -49,15 +49,13 @@ const MapScreen = ({navigation}) => {
       setRegion({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
-        latitudeDelta: 0.00922,  // Zoom level
-        longitudeDelta: 0.00421, // Zoom level
+        latitudeDelta: 0.00922, 
+        longitudeDelta: 0.00421,
       });
   
       let address = await Location.reverseGeocodeAsync({ latitude: location.coords.latitude, longitude: location.coords.longitude });
-      // Set the current location to the full address
       setCurrentLocation(address[0].name + ', ' + address[0].city + ', ' + address[0].region + ', ' + address[0].country);
 
-        // Send a notification when the location is fetched
       const notification = {
         title: 'Map Screen',
         body: 'Your location has been updated!',
@@ -85,6 +83,16 @@ const MapScreen = ({navigation}) => {
     
 
     }
+
+    const handleLocationInput = (text) => {
+      setDestinationLocation(text);  
+      if(text.length > 2){  
+        const filtered = locations.filter(location => location.toLowerCase().includes(text.toLowerCase()));
+        setFilteredLocations(filtered);
+      } else {
+        setFilteredLocations([]);
+      }
+    };
     
     const handleRecentSearchPress = (search) => {
       navigation.navigate('MatchScreen', { selectedSearch: search });
@@ -105,28 +113,33 @@ const MapScreen = ({navigation}) => {
         </MapView>
       )}
       <View style={styles.locationsContainer}>
+      <TextInput
+      style={styles.locationInput}
+      placeholder="Current location"
+      value={currentLocation}
+      onChangeText={text => setCurrentLocation(text)}
+    />
         <TextInput
-          style={styles.locationInput}
-          placeholder="Current location"
-          value={currentLocation}
-          onChangeText={text => setCurrentLocation(text)}
-        />
-        <GooglePlacesAutocomplete
-            placeholder='Where Would You Like to Go?'
-            fetchDetails={true}
-            onPress={(data, details = null) => {
-                console.log(data);
-                setDestinationLocation(data.description);
-            }}
-            query={{
-                key: 'AIzaSyD5GUOMMrDY5Ml8JOQ5j7z7p9f8GaGCDBg',
-                language: 'en',
-            }}
-            styles={{
-                textInputContainer: styles.locationInputContainer,
-                textInput: styles.locationInput,
-            }}
-        />
+        style={styles.locationInput}
+        placeholder="Where Would You Like to Go?"
+        value={destinationLocation}
+        onChangeText={handleLocationInput}
+      />
+
+    {filteredLocations.slice(0, 3).map((location, index) => (
+      <TouchableOpacity 
+          key={index} 
+          style={styles.recentSearchItem}
+          onPress={() => {
+              setDestinationLocation(location);
+              setFilteredLocations([]); 
+          }}
+      >
+          <Text style={styles.recentSearchText}>{location}</Text>
+      </TouchableOpacity>
+
+      ))}
+
         <Button title="Submit" onPress={submitLocations} />
         <View>
           <Text style={styles.recentSearchTitle}>Recent Searches:</Text>
