@@ -2,9 +2,11 @@ import { React, useState, useEffect} from 'react';
 import { View, TextInput, StyleSheet, FlatList, TouchableOpacity, navigation, Text, Button } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { Match } from './MatchingScreen'; 
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
 
 
 
@@ -17,6 +19,7 @@ Notifications.setNotificationHandler({
   }),
 });
 
+const { GOOGLE_API_KEY } = Constants.manifest.extra;
 
 const MapScreen = ({navigation}) => {
     const [location, setLocation] = useState(null);
@@ -26,7 +29,11 @@ const MapScreen = ({navigation}) => {
   const [region, setRegion] = useState(null);
   const [recentSearches, setRecentSearches] = useState([]);
     
-  Location.setGoogleApiKey("AIzaSyD5GUOMMrDY5Ml8JOQ5j7z7p9f8GaGCDBg");
+  if (GOOGLE_API_KEY) {
+    Location.setGoogleApiKey(GOOGLE_API_KEY);
+  } else {
+    console.warn('Google API key is not provided!');
+  }  
 
     useEffect(() => {
       (async () => {
@@ -104,10 +111,21 @@ const MapScreen = ({navigation}) => {
           value={currentLocation}
           onChangeText={text => setCurrentLocation(text)}
         />
-        <TextInput
-          style={styles.locationInput}
-          placeholder="Where Would You Like to Go?"
-          onChangeText={text => setDestinationLocation(text)}
+        <GooglePlacesAutocomplete
+            placeholder='Where Would You Like to Go?'
+            fetchDetails={true}
+            onPress={(data, details = null) => {
+                console.log(data);
+                setDestinationLocation(data.description);
+            }}
+            query={{
+                key: 'AIzaSyD5GUOMMrDY5Ml8JOQ5j7z7p9f8GaGCDBg',
+                language: 'en',
+            }}
+            styles={{
+                textInputContainer: styles.locationInputContainer,
+                textInput: styles.locationInput,
+            }}
         />
         <Button title="Submit" onPress={submitLocations} />
         <View>

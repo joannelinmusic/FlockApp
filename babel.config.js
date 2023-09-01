@@ -1,6 +1,9 @@
+const { withNextEnv } = require('@next/env');
+
 module.exports = function(api) {
   api.cache(true);
-  return {
+  
+  return withNextEnv({
     presets: ['babel-preset-expo'],
-  };
+  });
 };

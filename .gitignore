@@ -75,4 +75,6 @@ yarn-error.log
 web-build/
 dist/
 
+.env
+
 # @end expo-cli
